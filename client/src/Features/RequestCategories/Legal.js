@@ -7,7 +7,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import AddMessages from "../AddMessages";
+import AddMessages from "../Messages/AddMessages";
 
 export default function Legal () {
     const {data, refetch} = useFetchData('http://localhost:5000/servicerequests/listservicerequset')

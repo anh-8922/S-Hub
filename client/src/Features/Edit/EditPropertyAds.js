@@ -6,14 +6,14 @@ import Row from 'react-bootstrap/Row';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useState, useEffect } from 'react';
 import { useCookies } from "react-cookie"
-import { useGetUserID } from "../CustomHooks/useGetUserID"
+import { useGetUserID } from "../../CustomHooks/useGetUserID"
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 import { useNavigate, useParams } from 'react-router-dom';
-import useFetchData from '../CustomHooks/useFetchData';
-import SinglePostLayout from '../Layout/SinglePostLayout';
+import useFetchData from '../../CustomHooks/useFetchData';
+import SinglePostLayout from '../../Layout/SinglePostLayout';
 
 
 export default function EditProperties() {

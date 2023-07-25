@@ -6,8 +6,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import AddServiceMessages from "../AddServiceMessage"
-import AddServiceReview from "../AddServiceReview"
+import AddServiceMessages from "../Messages/AddServiceMessage"
+import AddServiceReview from "../Messages/AddServiceReview"
 import { useState } from "react"
 
 export default function Painters () {

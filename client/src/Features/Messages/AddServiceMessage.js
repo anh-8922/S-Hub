@@ -4,14 +4,14 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 import { useNavigate, useParams } from 'react-router-dom'
-import { useGetUserID } from "../CustomHooks/useGetUserID";
+import { useGetUserID } from "../../CustomHooks/useGetUserID";
 import { useCookies } from "react-cookie"
 
-export default function AddServiceReview ({ postId, handleCloseReview }) {
+export default function AddServiceMessages ({ postId, handleCloseMessage }) {
     const userID = useGetUserID()
     const [ cookies, _] = useCookies(["access_token"])
     console.log("post id:", postId)
-    const [textReview, setTextReview] = useState ('')
+    const [textMesaage, setTextMassage] = useState ('')
     const [isSubmit, setSubmit] = useState (false)
     const [emptyTextError, setEmptyTextError] = useState (false)
     const [invalidUser, setInvalidUser] = useState (false)
@@ -19,14 +19,14 @@ export default function AddServiceReview ({ postId, handleCloseReview }) {
 
     
     const handleCancel = () => {
-        handleCloseReview();
+      handleCloseMessage();
     };
 
-    const handleSubmitReview= async (e) => {
+    const handleSubmitMessage= async (e) => {
 
         e.preventDefault();
 
-        if (!textReview || textReview.trim() === "") {
+        if (!textMesaage || textMesaage.trim() === "") {
           setEmptyTextError(true);
           console.log("Post text cannot be empty")
           return;
@@ -36,8 +36,8 @@ export default function AddServiceReview ({ postId, handleCloseReview }) {
             console.log("Post text cannot be empty")
             return;
           }
-        const response = await axios.put('http://localhost:5000/message/addnewservicereview' ,
-        {textReview, postId},{
+        const response = await axios.put('http://localhost:5000/message/addnewservicemessage' ,
+        {textMesaage, postId},{
             withCredentials: true,
             headers: {
                 "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export default function AddServiceReview ({ postId, handleCloseReview }) {
         }
           if (response.data.success === true){
             setSubmit(true)
-            handleCloseReview()
+            handleCloseMessage()
             // navigate("/")
           }
 
@@ -60,7 +60,7 @@ export default function AddServiceReview ({ postId, handleCloseReview }) {
     return(
         <div>
             {!isSubmit? (
-                <form onSubmit={handleSubmitReview}>
+                <form onSubmit={handleSubmitMessage}>
                 <label
                   style={{
                     display: "flex",
@@ -72,9 +72,9 @@ export default function AddServiceReview ({ postId, handleCloseReview }) {
                   <textarea
                     type="text"
                     id="text"
-                    value={textReview}
+                    value={textMesaage}
                     // required={true}
-                    onChange={(e) => setTextReview(e.target.value)}
+                    onChange={(e) => setTextMassage(e.target.value)}
                     style={{ width: "40rem", height: "40rem" }}
                   />
                 </label>
@@ -114,7 +114,7 @@ export default function AddServiceReview ({ postId, handleCloseReview }) {
         <Stack sx={{ width: '30%' }} spacing={2} onClose={() => navigate("/service")}>
               <Alert variant="filled" severity="success" >
                 <AlertTitle style={{ color: 'white' }}>Sucess</AlertTitle>
-                <strong style={{ color: 'white' }}>Review Added Successfully!</strong>
+                <strong style={{ color: 'white' }}>Message Added Successfully!</strong>
               </Alert>
               </Stack>
         </div>
@@ -134,7 +134,7 @@ export default function AddServiceReview ({ postId, handleCloseReview }) {
             <Alert variant="filled" severity="error"  onClick={() => navigate("/service")}>
               <AlertTitle style={{ color: "white" }} >Error</AlertTitle>
               <strong style={{ color: "white" }}>
-                Review can not be empty!
+                Message can not be empty!
               </strong>
             </Alert>
           </Stack>

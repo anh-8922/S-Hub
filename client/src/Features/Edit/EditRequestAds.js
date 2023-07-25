@@ -5,13 +5,13 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import { useState, useEffect } from 'react';
 import { useCookies } from "react-cookie"
-import { useGetUserID } from "../CustomHooks/useGetUserID"
+import { useGetUserID } from "../../CustomHooks/useGetUserID"
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 import { useNavigate, useParams } from 'react-router-dom';
-import useFetchData from '../CustomHooks/useFetchData';
+import useFetchData from '../../CustomHooks/useFetchData';
 
 
 export default function EditRequestAds() {
