@@ -60,7 +60,13 @@ export const handleUserRegister = async (req, res) => {
       }
   
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-  
+      
+      res.cookie("access_token", token, {
+        httpOnly: true,
+        secure: true, // the cookie will be sent only over HTTPS in production
+        sameSite: "none" ,
+        // sameSite: "lax", //"none", "strict"
+      });
       // res.json({token, userID: user._id });
       res.send({success: true, token, userID: user._id })
       console.log('User login successful');

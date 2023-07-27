@@ -1,26 +1,34 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import dbConnect from './config/db.js'
-import userRoutes from './routes/userRoutes.js'
-import guideRoutes from './routes/guideRoutes.js'
-import communityRoutes from './routes/communityRoutes.js'
-import housingRoutes from './routes/housingRoutes.js'
-import serviceProviderRoutes from './routes/serviceProviderRoutes.js'
-import  serviceRequestRoutes from './routes/serviceRequestRoutes.js'
-import replyRoutes from "./routes/replyRoutes.js"
 import cookieParser from "cookie-parser"
-import messageRoutes from './routes/messageRoutes.js'
+
+import dbConnect from './src/config/db.js'
+import userRoutes from './src/routes/userRoutes.js'
+import guideRoutes from './src/routes/guideRoutes.js'
+import communityRoutes from './src/routes/communityRoutes.js'
+import housingRoutes from './src/routes/housingRoutes.js'
+import serviceProviderRoutes from './src/routes/serviceProviderRoutes.js'
+import  serviceRequestRoutes from './src/routes/serviceRequestRoutes.js'
+import replyRoutes from "./src/routes/replyRoutes.js"
+import messageRoutes from './src/routes/messageRoutes.js'
 
 dotenv.config();
 dbConnect();
 
 const app = express();
 // app.use(cors());
-app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true
-  }))
+const corsOptions = {
+  origin:
+    process.env.NODE_ENV === "production"
+      ? process.env.CLIENT
+      : "http://localhost:3000",
+  credentials: true,
+  preflightContinue: true,
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));  
 app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded ({extended : false}));
